@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "837313314545",
+    "project_id": "tg-app-88324",
+    "storage_bucket": "tg-app-88324.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837313314545:android:9e43b19ec3d11a68663350",
+        "android_client_info": {
+          "package_name": "com.example.tg_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7TEunNCNXxMX2qYTqxvs7idVlyA9p76o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
