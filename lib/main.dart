@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            textTheme: GoogleFonts.kanitTextTheme(),
+            fontFamily: 'Walkway',
           ),
           home: Intro1(),
         );
