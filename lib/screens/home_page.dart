@@ -3,7 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:tg_app/screens/cultes_page.dart';
 import 'package:tg_app/screens/detail_video_page.dart';
+import 'package:tg_app/screens/dunamis_page.dart';
+import 'package:tg_app/screens/seminaires_page.dart';
 
 
 class HomePage2 extends StatefulWidget {
@@ -43,54 +46,78 @@ class _HomePageState extends State<HomePage2> {
             Text('Decouvrer', style: TextStyle(fontSize: 17.sp),),
             Row(
               children: [
-                Container(
-                  height: 50.h,
-                  width: 165.w,
-                  decoration: BoxDecoration(
-                    color: Color(0xff868ED4),
-                    borderRadius: BorderRadius.circular(10.r)
-                  ),
-                  child: Row(
-                    
-                    children: [
-                      Icon(Icons.arrow_right, size: 30, color: Colors.white,),
-                      Text('Nos cultes', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CultesPage()),
+                    );
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: 165.w,
+                    decoration: BoxDecoration(
+                      color: Color(0xff868ED4),
+                      borderRadius: BorderRadius.circular(10.r)
+                    ),
+                    child: Row(
+                      
+                      children: [
+                        Icon(Icons.arrow_right, size: 30, color: Colors.white,),
+                        Text('Nos cultes', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
+                      ],
+                    ),
                   ),
                 ),
                 Spacer(),
-                Container(
-                  height: 50.h,
-                  width: 165.w,
-                  decoration: BoxDecoration(
-                    color: Color(0xff868ED4),
-                    borderRadius: BorderRadius.circular(10.r)
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.arrow_right, size: 30, color: Colors.white,),
-                      Text('Nos séminaires', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SeminairesPage()),
+                    );
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: 165.w,
+                    decoration: BoxDecoration(
+                      color: Color(0xff868ED4),
+                      borderRadius: BorderRadius.circular(10.r)
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.arrow_right, size: 30, color: Colors.white,),
+                        Text('Nos séminaires', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 10.h,),
-            Container(
-                  height: 50.h,
-                  width: 160.w,
-                  decoration: BoxDecoration(
-                    color: Color(0xff868ED4),
-                    borderRadius: BorderRadius.circular(10.r)
+            GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const DunamisPage()),
+                    );
+                  },
+              child: Container(
+                    height: 50.h,
+                    width: 160.w,
+                    decoration: BoxDecoration(
+                      color: Color(0xff868ED4),
+                      borderRadius: BorderRadius.circular(10.r)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.arrow_right, size: 35, color: Colors.white,),
+                        Text('Nos éditions DUNAMIS', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.arrow_right, size: 35, color: Colors.white,),
-                      Text('Nos éditions DUNAMIS', style: TextStyle(color: Colors.white, fontSize: 18.sp),)
-                    ],
-                  ),
-                ),
+            ),
 
                 Row(children: [
   Text('Vidéos', style: TextStyle(fontSize: 20.sp)),
@@ -117,101 +144,121 @@ StreamBuilder<List<Map<String, dynamic>>>(
         );
       },
               child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
-                  color: Colors.white,
-                  border: Border.all(color: Color(0xffd8d8d8), width: 0.5),
+  height: 190.h,
+  padding: EdgeInsets.all(12),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(20.r),
+    color: Colors.white,
+    border: Border.all(color: Color(0xffd8d8d8), width: 0.5),
+  ),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Partie gauche : titre et thème
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  video['title'],
+                  style: TextStyle(fontSize: 14.sp),
                 ),
-                child: Column(children: [
-                  Row(children: [
-                    Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(height: 5.h),
+                Text(
+                  video['theme'],
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 12.h),
+                Row(
                   children: [
-                    Text('${video['title']}', style: TextStyle(fontSize: 14.sp)),
-                    SizedBox(height: 5.h),
-                    Text(video['theme'], style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 13.h),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                          decoration: BoxDecoration(
-                            color: Colors.orange[100],
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                          child: Text('DIM. ${video['date']}'),
-                        ),
-                        SizedBox(width: 2.w),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                          decoration: BoxDecoration(
-                            color: Colors.brown[100],
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                          child: Text(video['orateur']),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10.h),
-                    /*Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            video['image'],
-                            width: 100,
-                            height: 80,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        IconButton(
-                          icon: Icon(Icons.play_circle),
-                          onPressed: () {
-                            // TODO: ouvrir YouTube
-                          },
-                        ),
-                        Spacer(),
-                        Icon(Icons.favorite_border),
-                      ],
-                    )*/
-                  ],
-                ),
-                    Spacer(),
-                ClipRRect(
-                          borderRadius: BorderRadius.circular(15.r),
-                          child: Image.network(
-                            video['image_orateur'],
-                            width: 100.w,
-                            height: 100.h,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                  ],),
-                  Row(children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 80.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                       decoration: BoxDecoration(
-                        color: Color(0xffd8d8d8),
+                        color: Colors.orange[100],
                         borderRadius: BorderRadius.circular(20.r),
                       ),
-                      child: Row(
-                        children: [
-                          Icon(IconsaxPlusBold.video_circle, color: Colors.black,),
-                          Text('Regarder', style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.bold),)
-                        ],
+                      child: Text(
+                        'DIM. ${video['date']}',
+                        style: TextStyle(fontSize: 11.sp),
                       ),
                     ),
-                    Spacer(),
-                    CircleAvatar(
-                      radius: 25.r,
-                      backgroundColor: const Color(0xffd8d8d8),
-                      child: IconButton(onPressed: () {}, iconSize: 30, icon: Icon(IconsaxPlusBold.heart, color: Colors.black,),),
-                    )
-                  ])
-                ],)
+                    SizedBox(width: 6.w),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                      decoration: BoxDecoration(
+                        color: Colors.brown[100],
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Text(
+                        video['orateur'],
+                        style: TextStyle(fontSize: 11.sp),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Partie droite fixe : image
+          SizedBox(width: 10.w),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15.r),
+            child: Image.network(
+              video['image_orateur'],
+              width: 90.w,
+              height: 90.w,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              decoration: BoxDecoration(
+                color: Color(0xffd8d8d8),
+                borderRadius: BorderRadius.circular(20.r),
               ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(IconsaxPlusBold.video_circle, color: Colors.black),
+                  SizedBox(width: 6.w),
+                  Text(
+                    'Regarder',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(width: 10.w),
+          CircleAvatar(
+            radius: 25.r,
+            backgroundColor: const Color(0xffd8d8d8),
+            child: Icon(IconsaxPlusBold.heart, color: Colors.black),
+          ),
+        ],
+      ),
+    ],
+  ),
+),
+
             ),
           );
         }).toList(),

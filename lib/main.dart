@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Walkway',
           ),
-          //home: SecretAccessPage(),
-              home: Intro1(),
+          home: SecretAccessPage(),
+              //home: Intro1(),
         );
       },
     );
