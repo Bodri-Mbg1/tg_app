@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tg_app/class/secret_page.dart';
 import 'package:tg_app/firebase_options.dart';
 import 'package:tg_app/intro/intro1.dart';
-import 'package:tg_app/intro/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +28,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Walkway',
           ),
-          home: Intro1(),
+          //home: SecretAccessPage(),
+              home: Intro1(),
         );
       },
     );
