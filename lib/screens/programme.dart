@@ -1,10 +1,12 @@
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:tg_app/main.dart';
 
 class Programme extends StatelessWidget {
-  Programme({super.key});
+  const Programme({super.key});
 
   final Color orange = const Color(0xFFFEC26C);
   final Color violet = const Color(0xff514eb6);

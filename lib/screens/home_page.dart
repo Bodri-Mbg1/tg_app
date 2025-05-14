@@ -19,13 +19,16 @@ class HomePage2 extends StatefulWidget {
 class _HomePageState extends State<HomePage2> {
   @override
 
+  // ignore: override_on_non_overriding_member
   Stream<List<Map<String, dynamic>>> recupererToutesLesVideos() {
   final firestore = FirebaseFirestore.instance;
   return firestore.collectionGroup('videos').snapshots().map((snapshot) {
+    // ignore: unnecessary_cast
     return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
   });
 }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

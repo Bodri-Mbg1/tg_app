@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 Stream<List<Map<String, dynamic>>> recupererToutesLesVideos() {
   final firestore = FirebaseFirestore.instance;
   return firestore.collectionGroup('videos').snapshots().map((snapshot) {
+    // ignore: unnecessary_cast
     return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
   });
 }

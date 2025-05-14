@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:tg_app/screens/home_page.dart';
 import 'package:tg_app/screens/nav_bar.dart';
 
 class Intro2 extends StatefulWidget {

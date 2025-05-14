@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tg_app/screens/detail_video_page.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SeminairesPage extends StatelessWidget {
   const SeminairesPage({super.key});
@@ -17,6 +16,7 @@ class SeminairesPage extends StatelessWidget {
           if (snapshot.docs.isEmpty) return [];
           final ref = snapshot.docs.first.reference;
           final videosSnap = await ref.collection('videos').get();
+          // ignore: unnecessary_cast
           return videosSnap.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
         });
   }

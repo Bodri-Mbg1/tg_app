@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tg_app/connect.dart';
 import 'package:tg_app/intro/intro2.dart';
-import 'package:tg_app/screens/home_page.dart';
 
 class Intro1 extends StatefulWidget {
   const Intro1({super.key});
