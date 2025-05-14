@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:tg_app/screens/home_page.dart';
+import 'package:tg_app/screens/nav_bar.dart';
 
 class Intro2 extends StatefulWidget {
   const Intro2({super.key});
@@ -161,7 +162,7 @@ class _Intro2State extends State<Intro2> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage2(),
+                          builder: (context) => NavBar(),
                         ));
                   },
                   child: Padding(

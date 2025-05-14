@@ -105,7 +105,7 @@ class _CultesPageState extends State<CultesPage> with TickerProviderStateMixin {
               color: Colors.orange[200],
               borderRadius: BorderRadius.circular(50),
             ),
-            labelPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+            labelPadding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 8.h),
             tabs: moisLabels.map((mois) => Tab(text: mois)).toList(),
           ),
           Expanded(

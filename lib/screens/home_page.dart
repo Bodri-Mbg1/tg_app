@@ -43,7 +43,9 @@ class _HomePageState extends State<HomePage2> {
                   child: Icon(IconsaxPlusBold.notification, color: Colors.black,), )
               ],
             ),
+            SizedBox(height: 10.h,),
             Text('Decouvrer', style: TextStyle(fontSize: 17.sp),),
+            SizedBox(height: 10.h,),
             Row(
               children: [
                 GestureDetector(
@@ -118,13 +120,14 @@ class _HomePageState extends State<HomePage2> {
                     ),
                   ),
             ),
+            SizedBox(height: 10.h,),
 
                 Row(children: [
   Text('Vidéos', style: TextStyle(fontSize: 20.sp)),
   Spacer(),
   TextButton(onPressed: () {}, child: Text('Voir plus'))
 ]),
-SizedBox(height: 10.h),
+
 StreamBuilder<List<Map<String, dynamic>>>(
     stream: recupererToutesLesVideos(),
     builder: (context, snapshot) {
