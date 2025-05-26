@@ -1,42 +1,58 @@
-// ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:tg_app/main.dart';
 
-class Programme extends StatelessWidget {
-  const Programme({super.key});
+class Programme extends StatefulWidget {
+   const Programme({super.key});
 
-  final Color orange = const Color(0xFFFEC26C);
-  final Color violet = const Color(0xff514eb6);
+  @override
+  State<Programme> createState() => _ProgrammeState();
+}
+
+class _ProgrammeState extends State<Programme> {
+  final Color orange = Color(0xFFFEC26C);
+
+  final Color violet = Color(0xff514eb6);
 
   final List<Map<String, String>> programmes = const [
     {
       "title": "Reunion de prière",
-      "description":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "heure": "18H"
     },
     {
       "title": "Reunion d’enseignement",
-      "description":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "heure": "18H"
     },
     {
       "title": "Reunion de jeunesse",
-      "description":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "heure": "14H"
     },
     {
       "title": "Culte d’adoration",
-      "description":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "heure": "09H"
     },
   ];
+  @override
+  void initState() {
+    AwesomeNotifications().requestPermissionToSendNotifications();
+    super.initState();
+  }
+
+  triggerNotification() async {
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 10,
+        channelKey: 'basic_channel',
+        title: "Reunion de prière",
+        body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        notificationLayout: NotificationLayout.BigPicture,
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +65,7 @@ class Programme extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("Programme",
-                  style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600, color: Colors.black)),
               const SizedBox(height: 20),
               Expanded(
                 child: Stack(
@@ -61,10 +74,7 @@ class Programme extends StatelessWidget {
                       left: 18,
                       top: 0,
                       bottom: 0,
-                      child: Container(
-                        width: 2,
-                        color: violet,
-                      ),
+                      child: Container(width: 2, color: violet),
                     ),
                     ListView.builder(
                       itemCount: programmes.length,
@@ -80,10 +90,7 @@ class Programme extends StatelessWidget {
                                   Container(
                                     width: 12,
                                     height: 12,
-                                    decoration: BoxDecoration(
-                                      color: orange,
-                                      shape: BoxShape.circle,
-                                    ),
+                                    decoration: BoxDecoration(color: orange, shape: BoxShape.circle),
                                   ),
                                   const SizedBox(height: 4),
                                 ],
@@ -93,32 +100,17 @@ class Programme extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(item['title']!,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16)),
+                                    Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                                     const SizedBox(height: 4),
-                                    Text(
-                                      item['description']!,
-                                      style: const TextStyle(fontSize: 13),
-                                    ),
+                                    Text(item['description']!, style: const TextStyle(fontSize: 13)),
                                   ],
                                 ),
                               ),
                               const SizedBox(width: 10),
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 14),
-                                decoration: BoxDecoration(
-                                  color: orange,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  item['heure']!,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+                                decoration: BoxDecoration(color: orange, borderRadius: BorderRadius.circular(12)),
+                                child: Text(item['heure']!, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
@@ -132,18 +124,12 @@ class Programme extends StatelessWidget {
               Center(
                 child: ElevatedButton.icon(
                   onPressed: () => showDaySelectionDialog(context),
-                  icon:
-                      const Icon(Icons.notifications_none, color: Colors.white),
-                  label: const Text(
-                    'Activer un rappel',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
+                  icon: const Icon(Icons.notifications_none, color: Colors.white),
+                  label: const Text('Activer un rappel', style: TextStyle(fontSize: 16, color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
                 ),
               ),
@@ -156,16 +142,9 @@ class Programme extends StatelessWidget {
   }
 
   void showDaySelectionDialog(BuildContext context) {
-    final List<String> jours = [
-      'Lundi',
-      'Mardi',
-      'Jeudi',
-      'Dimanche',
-    ];
+    final List<String> jours = ['Mardi', 'Jeudi', 'Samedi', 'Vendredi', 'Dimanche'];
 
-    final Map<String, bool> selection = {
-      for (var jour in jours) jour: false,
-    };
+    final Map<String, bool> selection = {for (var jour in jours) jour: false};
 
     showDialog(
       context: context,
@@ -194,27 +173,11 @@ class Programme extends StatelessWidget {
                   child: const Text("Annuler"),
                 ),
                 ElevatedButton(
-  onPressed: () async {
-  final bool? granted = await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestPermission();
-
-  if (granted != null && granted) {
-    Navigator.pop(context);
-    scheduleSelectedDays(selection);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("📅 Notifications planifiées")),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("⛔ Notifications non autorisées")),
-    );
-  }
-},
-
-  child: const Text("Valider"),
-),
-
+                  onPressed: () {
+                    
+                  },
+                  child: const Text("Valider"),
+                ),
               ],
             );
           },
@@ -222,116 +185,4 @@ class Programme extends StatelessWidget {
       },
     );
   }
-
-  void scheduleSelectedDays(Map<String, bool> selectedDays) {
-    if (selectedDays['Lundi'] == true) {
-      _scheduleNotification(
-        id: 1,
-        title: "Réunion de Prière",
-        body: "Commence ta semaine dans la prière.",
-        weekday: DateTime.monday,
-        hour: 8,
-        minute: 0,
-      );
-      _scheduleNotification(
-        id: 2,
-        title: "Réunion de Prière",
-        body: "Temps de méditation spirituelle.",
-        weekday: DateTime.monday,
-        hour: 12,
-        minute: 0,
-      );
-    }
-    if (selectedDays['Mardi'] == true) {
-      _scheduleNotification(
-        id: 3,
-        title: "Enseignement du soir",
-        body: "Rejoins la réunion d’enseignement.",
-        weekday: DateTime.tuesday,
-        hour: 18,
-        minute: 0,
-      );
-    }
-    if (selectedDays['Jeudi'] == true) {
-      _scheduleNotification(
-        id: 4,
-        title: "Réveil de prière",
-        body: "Prépare ton cœur pour le message.",
-        weekday: DateTime.thursday,
-        hour: 9,
-        minute: 0,
-      );
-    }
-    if (selectedDays['Dimanche'] == true) {
-      _scheduleNotification(
-        id: 5,
-        title: "Culte dominical",
-        body: "Participe au culte avec foi.",
-        weekday: DateTime.sunday,
-        hour: 10,
-        minute: 30,
-      );
-      _scheduleNotification(
-        id: 6,
-        title: "Bilan du jour",
-        body: "Partage ta réflexion du culte.",
-        weekday: DateTime.sunday,
-        hour: 18,
-        minute: 0,
-      );
-    }
-  }
-
-  void _scheduleNotification({
-    required int id,
-    required String title,
-    required String body,
-    required int weekday,
-    required int hour,
-    required int minute,
-  }) {
-    final tz.TZDateTime scheduledDate =
-        _nextInstanceOfWeekdayTime(weekday, hour, minute);
-
-    flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduledDate,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'hebdo_channel',
-          'Notifications Hebdomadaires',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-      androidAllowWhileIdle: true,
-      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
-  }
-
-  tz.TZDateTime _nextInstanceOfWeekdayTime(int weekday, int hour, int minute) {
-    final now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduled = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      hour,
-      minute,
-    );
-
-    while (scheduled.weekday != weekday || scheduled.isBefore(now)) {
-      scheduled = scheduled.add(const Duration(days: 1));
-    }
-
-    return scheduled;
-  }
-}
-
-extension on AndroidFlutterLocalNotificationsPlugin? {
-  requestPermission() {}
 }

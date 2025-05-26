@@ -1,16 +1,11 @@
+import 'dart:io';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tg_app/firebase_options.dart';
 import 'package:tg_app/intro/intro1.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
-
-// 🔔 Plugin global
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,24 +15,24 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // 🌍 Initialisation des formats de date
+  // 🌍 Initialisation du format français
   await initializeDateFormatting('fr_FR', null);
 
-  // 🕐 Initialisation timezone
-  tz.initializeTimeZones();
+  AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: 'basic_channel',
+      channelName: 'Basic notifications',
+      channelDescription: 'Notification channel for basic tests',
+      defaultColor: const Color(0xFF9D50DD),
+      ledColor: Colors.white
+    )
+  ],
+  debug: true,);
 
-  // 🔔 Initialisation notifications
-  const AndroidInitializationSettings androidSettings =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  const InitializationSettings initializationSettings = InitializationSettings(
-    android: androidSettings,
-  );
-
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(const MyApp());
 }
+
 
 
 class MyApp extends StatelessWidget {
@@ -55,11 +50,6 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Walkway',
           ),
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
           supportedLocales: const [
             Locale('fr', 'FR'),
           ],
