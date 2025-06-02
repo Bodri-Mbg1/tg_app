@@ -7,7 +7,6 @@
 
     <application
         android:label="tg_app"
-        android:name="com.example.tg_app.Application"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
