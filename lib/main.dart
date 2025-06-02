@@ -1,11 +1,10 @@
-import 'dart:io';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tg_app/firebase_options.dart';
 import 'package:tg_app/intro/intro1.dart';
+import 'package:tg_app/services/noti_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,19 +14,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // Notification
+
+  NotiServices().initNotification();
+
   // 🌍 Initialisation du format français
   await initializeDateFormatting('fr_FR', null);
-
-  AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: 'basic_channel',
-      channelName: 'Basic notifications',
-      channelDescription: 'Notification channel for basic tests',
-      defaultColor: const Color(0xFF9D50DD),
-      ledColor: Colors.white
-    )
-  ],
-  debug: true,);
 
 
   runApp(const MyApp());
