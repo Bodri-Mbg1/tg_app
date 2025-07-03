@@ -13,6 +13,7 @@ Stream<List<Map<String, dynamic>>> recupererToutesLesVideos() {
   return firestore.collectionGroup('videos').snapshots().map((snapshot) {
     // ignore: unnecessary_cast
     return snapshot.docs
+        // ignore: unnecessary_cast
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
   });
@@ -33,6 +34,7 @@ void ouvrirLienVideo(String url) async {
       await intent.launch();
     } else {
       // iOS ou autre : message d'erreur
+      // ignore: avoid_print
       print("❌ Impossible d’ouvrir le lien.");
     }
   }
@@ -155,6 +157,7 @@ class DetailVideoPage extends StatelessWidget {
                     stream: recupererToutesLesVideos(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData)
+                        // ignore: curly_braces_in_flow_control_structures
                         return const CircularProgressIndicator();
                       final videos = snapshot.data!;
                       return SingleChildScrollView(

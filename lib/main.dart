@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +25,8 @@ void main() async {
     if (await hasExactAlarmPermission()) {
       await notiServices.planifier4Notifications();
     } else {
+      // ignore: duplicate_ignore
+      // ignore: avoid_print
       print('⚠️ Permission EXACT_ALARM refusée. Notifications non planifiées.');
       // 👉 tu peux aussi rediriger vers les paramètres ici
     }

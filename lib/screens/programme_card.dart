@@ -27,6 +27,8 @@ class ProgrammeCard extends StatelessWidget {
           image: AssetImage(imagePath), // Ton image en assets
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
+            // ignore: deprecated_member_use
+            // ignore: deprecated_member_use
             overlayColor.withOpacity(0.85), // Teinte colorée
             BlendMode.darken,
           ),

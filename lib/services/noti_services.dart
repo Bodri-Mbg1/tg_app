@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// ignore: library_prefixes
 import 'package:timezone/data/latest_all.dart' as tzData;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:tg_app/services/exact_alarm_helper.dart';
@@ -61,6 +62,7 @@ class NotiServices {
     final hasPermission = await ExactAlarmHelper.hasExactAlarmPermission();
 
     if (!hasPermission) {
+      // ignore: avoid_print
       print(
           "❌ Permission 'Exact Alarms' refusée. Notification ID=$id ignorée.");
       return;
@@ -82,6 +84,7 @@ class NotiServices {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
+    // ignore: avoid_print
     print("📆 Notification ID=$id planifiée pour : $scheduledDate");
 
     try {
@@ -91,12 +94,14 @@ class NotiServices {
         body,
         scheduledDate,
         notidicationDetails(),
+        // ignore: deprecated_member_use
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       );
     } catch (e) {
+      // ignore: avoid_print
       print("❌ Erreur lors de la planification de la notification ID=$id : $e");
     }
   }
@@ -111,6 +116,7 @@ class NotiServices {
       hour: 9,
       minute: 0,
     );
+    // ignore: avoid_print
     print("✅ Notification Lundi 9h planifiée");
 
     await scheduleWeeklyNotification(

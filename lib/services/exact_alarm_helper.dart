@@ -7,9 +7,11 @@ class ExactAlarmHelper {
   static Future<bool> hasExactAlarmPermission() async {
     if (!Platform.isAndroid) return true;
     try {
-      final bool result = await _channel.invokeMethod('hasExactAlarmPermission');
+      final bool result =
+          await _channel.invokeMethod('hasExactAlarmPermission');
       return result;
     } catch (e) {
+      // ignore: avoid_print
       print('Erreur lors de la vérification de la permission Exact Alarm : $e');
       return false;
     }

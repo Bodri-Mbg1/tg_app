@@ -8,7 +8,9 @@ Future<bool> hasExactAlarmPermission() async {
       final result = await platform.invokeMethod('areExactAlarmsPermitted');
       return result == true;
     } catch (e) {
-      print('❌ Erreur lors de la vérification de la permission exact alarm : $e');
+      // ignore: avoid_print
+      print(
+          '❌ Erreur lors de la vérification de la permission exact alarm : $e');
     }
   }
   return true; // iOS ou Android < 12

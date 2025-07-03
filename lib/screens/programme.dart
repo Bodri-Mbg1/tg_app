@@ -3,6 +3,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:tg_app/screens/programme_card.dart';
 import 'package:tg_app/services/exact_alarm_helper.dart';
@@ -161,8 +162,9 @@ class _ProgrammeState extends State<Programme> {
                       color: Colors.black)),
               const SizedBox(height: 20),
               Container(
-                height: 120.h,
-                margin: const EdgeInsets.all(16),
+                height: 110.h,
+                width: double.infinity,
+
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   // Ajoute une ombre si tu veux
@@ -177,13 +179,260 @@ class _ProgrammeState extends State<Programme> {
                       width: double.infinity,
                       height: double.infinity,
                     ),
+
                     // Overlay bleu semi-transparent
                     Container(
                       color: const Color(0xFF0D47A1).withOpacity(0.85),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(children: [
+                        Text('Chaque\nMardi',
+                            style: GoogleFonts.rubik(
+                                fontSize: 37.sp,
+                                letterSpacing: -1.7,
+                                height: 0.9.h,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20.h),
+                            Text('Reunion de prière',
+                                style: GoogleFonts.rubik(
+                                    letterSpacing: -1.5,
+                                    fontSize: 18.sp,
+                                    color: Colors.white)),
+                            SizedBox(height: 7.h),
+                            Container(
+                              height: 35.h,
+                              width: 140.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text('Dès 18H30',
+                                    style: GoogleFonts.rubik(
+                                        letterSpacing: -1,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                    ),
                   ],
                 ),
               ),
+              SizedBox(height: 10.h),
+              Container(
+                height: 110.h,
+                width: double.infinity,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  // Ajoute une ombre si tu veux
+                ),
+                clipBehavior: Clip.hardEdge, // Pour arrondir l'image aussi
+                child: Stack(
+                  children: [
+                    // Image de fond
+                    Image.asset(
+                      'assets/img/7246.jpg', // mets ici ton image
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+
+                    // Overlay bleu semi-transparent
+                    Container(
+                      color: const Color(0xFF66970B).withOpacity(0.85),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(children: [
+                        Text('Chaque\nJeudi',
+                            style: GoogleFonts.rubik(
+                                fontSize: 37.sp,
+                                letterSpacing: -1.7,
+                                height: 0.9.h,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20.h),
+                            Text('Reunion de prière',
+                                style: GoogleFonts.rubik(
+                                    letterSpacing: -1.5,
+                                    fontSize: 18.sp,
+                                    color: Colors.white)),
+                            SizedBox(height: 7.h),
+                            Container(
+                              height: 35.h,
+                              width: 140.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text('Dès 18H30',
+                                    style: GoogleFonts.rubik(
+                                        letterSpacing: -1,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Container(
+                height: 110.h,
+                width: double.infinity,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  // Ajoute une ombre si tu veux
+                ),
+                clipBehavior: Clip.hardEdge, // Pour arrondir l'image aussi
+                child: Stack(
+                  children: [
+                    // Image de fond
+                    Image.asset(
+                      'assets/img/7246.jpg', // mets ici ton image
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+
+                    // Overlay bleu semi-transparent
+                    Container(
+                      color: const Color(0xFF970B0D).withOpacity(0.85),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(children: [
+                        Text('Chaque\nSamedi',
+                            style: GoogleFonts.rubik(
+                                fontSize: 37.sp,
+                                letterSpacing: -1.7,
+                                height: 0.9.h,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20.h),
+                            Text('Reunion de prière',
+                                style: GoogleFonts.rubik(
+                                    letterSpacing: -1.5,
+                                    fontSize: 18.sp,
+                                    color: Colors.white)),
+                            SizedBox(height: 7.h),
+                            Container(
+                              height: 35.h,
+                              width: 140.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text('Dès 18H30',
+                                    style: GoogleFonts.rubik(
+                                        letterSpacing: -1,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Container(
+                height: 110.h,
+                width: double.infinity,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  // Ajoute une ombre si tu veux
+                ),
+                clipBehavior: Clip.hardEdge, // Pour arrondir l'image aussi
+                child: Stack(
+                  children: [
+                    // Image de fond
+                    Image.asset(
+                      'assets/img/7246.jpg', // mets ici ton image
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+
+                    // Overlay bleu semi-transparent
+                    Container(
+                      color: const Color(0xFF0B9797).withOpacity(0.85),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(children: [
+                        Text('Chaque\nDimanche',
+                            style: GoogleFonts.rubik(
+                                fontSize: 32.sp,
+                                letterSpacing: -1.7,
+                                height: 0.9.h,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20.h),
+                            Text('Reunion de prière',
+                                style: GoogleFonts.rubik(
+                                    letterSpacing: -1.5,
+                                    fontSize: 18.sp,
+                                    color: Colors.white)),
+                            SizedBox(height: 7.h),
+                            Container(
+                              height: 35.h,
+                              width: 140.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text('Dès 18H30',
+                                    style: GoogleFonts.rubik(
+                                        letterSpacing: -1,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(color: Colors.black),
               const SizedBox(height: 20),
               Center(
                 child: ElevatedButton.icon(
@@ -222,7 +471,7 @@ class _ProgrammeState extends State<Programme> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
+              /*ElevatedButton(
                 onPressed: () async {
                   final noti = NotiServices();
                   await noti.initNotification();
@@ -243,7 +492,7 @@ class _ProgrammeState extends State<Programme> {
                   );
                 },
                 child: const Text("Tester Notification Immédiate"),
-              )
+              )*/
             ],
           ),
         ),

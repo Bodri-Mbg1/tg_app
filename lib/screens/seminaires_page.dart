@@ -18,6 +18,7 @@ class SeminairesPage extends StatelessWidget {
       final videosSnap = await ref.collection('videos').get();
       // ignore: unnecessary_cast
       return videosSnap.docs
+          // ignore: unnecessary_cast
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     });
@@ -37,6 +38,7 @@ class SeminairesPage extends StatelessWidget {
           stream: recupererSeminaires(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
+              // ignore: curly_braces_in_flow_control_structures
               return const Center(child: CircularProgressIndicator());
             final videos = snapshot.data!;
             return ListView.builder(

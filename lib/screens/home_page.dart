@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage2> {
     return firestore.collectionGroup('videos').snapshots().map((snapshot) {
       // ignore: unnecessary_cast
       return snapshot.docs
+          // ignore: unnecessary_cast
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     });
@@ -182,6 +183,7 @@ class _HomePageState extends State<HomePage2> {
                 stream: recupererToutesLesVideos(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData)
+                    // ignore: curly_braces_in_flow_control_structures
                     return Center(child: CircularProgressIndicator());
                   final videos = snapshot.data!;
 
