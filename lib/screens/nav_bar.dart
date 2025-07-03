@@ -31,7 +31,7 @@ class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
     });
   }
 
-  final Color violet = const Color(0xff514eb6);
+  final Color violet = const Color(0xff0b4d97);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       bottomNavigationBar: Container(
         height: 80.h,
         decoration: BoxDecoration(
-          color: violet,
+          color: Color(0xff0b4d97),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),

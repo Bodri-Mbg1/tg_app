@@ -13,26 +13,31 @@ class SeminairesPage extends StatelessWidget {
         .limit(1)
         .snapshots()
         .asyncMap((snapshot) async {
-          if (snapshot.docs.isEmpty) return [];
-          final ref = snapshot.docs.first.reference;
-          final videosSnap = await ref.collection('videos').get();
-          // ignore: unnecessary_cast
-          return videosSnap.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-        });
+      if (snapshot.docs.isEmpty) return [];
+      final ref = snapshot.docs.first.reference;
+      final videosSnap = await ref.collection('videos').get();
+      // ignore: unnecessary_cast
+      return videosSnap.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text("Cultes du dimanche"),
-      backgroundColor: Colors.white,),
+      appBar: AppBar(
+        title: Text("Cultes du dimanche"),
+        backgroundColor: Colors.white,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: StreamBuilder<List<Map<String, dynamic>>>(
           stream: recupererSeminaires(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+            if (!snapshot.hasData)
+              return const Center(child: CircularProgressIndicator());
             final videos = snapshot.data!;
             return ListView.builder(
               itemCount: videos.length,
@@ -44,7 +49,8 @@ class SeminairesPage extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => DetailVideoPage(video: video)),
+                        MaterialPageRoute(
+                            builder: (_) => DetailVideoPage(video: video)),
                       );
                     },
                     child: Container(
@@ -52,7 +58,8 @@ class SeminairesPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
                         color: Colors.white,
-                        border: Border.all(color: Color(0xffd8d8d8), width: 0.5),
+                        border:
+                            Border.all(color: Color(0xffd8d8d8), width: 0.5),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,33 +68,42 @@ class SeminairesPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(video['title'], style: TextStyle(fontSize: 14.sp)),
+                                Text(video['title'],
+                                    style: TextStyle(fontSize: 14.sp)),
                                 SizedBox(height: 5.h),
                                 Text(
                                   video['theme'],
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(height: 12.h),
                                 Row(
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 12.w, vertical: 6.h),
                                       decoration: BoxDecoration(
                                         color: Colors.orange[100],
-                                        borderRadius: BorderRadius.circular(20.r),
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
                                       ),
-                                      child: Text('DIM. ${video['date']}', style: TextStyle(fontSize: 11.sp)),
+                                      child: Text('DIM. ${video['date']}',
+                                          style: TextStyle(fontSize: 11.sp)),
                                     ),
                                     SizedBox(width: 6.w),
                                     Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 12.w, vertical: 6.h),
                                       decoration: BoxDecoration(
                                         color: Colors.brown[100],
-                                        borderRadius: BorderRadius.circular(20.r),
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
                                       ),
-                                      child: Text(video['orateur'], style: TextStyle(fontSize: 11.sp)),
+                                      child: Text(video['orateur'],
+                                          style: TextStyle(fontSize: 11.sp)),
                                     ),
                                   ],
                                 ),

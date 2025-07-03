@@ -4,28 +4,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tg_app/firebase_options.dart';
 import 'package:tg_app/intro/intro1.dart';
+import 'package:tg_app/services/noti_permission_helper.dart';
 import 'package:tg_app/services/noti_services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+final notiServices = NotiServices();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🔥 Initialisation Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    // 🔥 Initialisation Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  // Notification
+    // 🔔 Notification
+    await notiServices.initNotification(); // ✅ initialise une seule fois
+    if (await hasExactAlarmPermission()) {
+      await notiServices.planifier4Notifications();
+    } else {
+      print('⚠️ Permission EXACT_ALARM refusée. Notifications non planifiées.');
+      // 👉 tu peux aussi rediriger vers les paramètres ici
+    }
 
-  NotiServices().initNotification();
+    // 🌍 Date FR
+    await initializeDateFormatting('fr_FR', null);
 
-  // 🌍 Initialisation du format français
-  await initializeDateFormatting('fr_FR', null);
-
-
-  runApp(const MyApp());
+    runApp(const MyApp());
+  } catch (e, stack) {
+    print('⛔️ Erreur au lancement : $e\n$stack');
+  }
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,18 +45,26 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Walkway',
-          ),
-          supportedLocales: const [
-            Locale('fr', 'FR'),
-          ],
-          home: const Intro1(),
-        );
-      },
+      child: Builder(
+        // 👈 très important ici
+        builder: (context) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(fontFamily: 'Walkway'),
+            supportedLocales: const [
+              Locale('fr', 'FR'),
+            ],
+            localizationsDelegates: const [
+              // ✅ Nécessaire pour les boîtes de dialogue, boutons, etc.
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: const Locale('fr', 'FR'),
+            home: const Intro1(),
+          );
+        },
+      ),
     );
   }
 }

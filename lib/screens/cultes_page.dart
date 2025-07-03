@@ -158,27 +158,32 @@ class _CultesPageState extends State<CultesPage> with TickerProviderStateMixin {
                           video['theme'],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 22.sp, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 12.h),
                         Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 6.h),
                               decoration: BoxDecoration(
                                 color: Colors.orange[100],
                                 borderRadius: BorderRadius.circular(20.r),
                               ),
-                              child: Text('DIM. ${video['date']}', style: TextStyle(fontSize: 11.sp)),
+                              child: Text('DIM. ${video['date']}',
+                                  style: TextStyle(fontSize: 11.sp)),
                             ),
                             SizedBox(width: 6.w),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 6.h),
                               decoration: BoxDecoration(
                                 color: Colors.brown[100],
                                 borderRadius: BorderRadius.circular(20.r),
                               ),
-                              child: Text(video['orateur'], style: TextStyle(fontSize: 11.sp)),
+                              child: Text(video['orateur'],
+                                  style: TextStyle(fontSize: 11.sp)),
                             ),
                           ],
                         ),
@@ -210,7 +215,8 @@ class _CultesPageState extends State<CultesPage> with TickerProviderStateMixin {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(IconsaxPlusBold.video_circle, color: Colors.black),
+                          Icon(IconsaxPlusBold.video_circle,
+                              color: Colors.black),
                           SizedBox(width: 6.w),
                           Text('Regarder',
                               style: TextStyle(

@@ -1,42 +1,47 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tzData;
+import 'package:timezone/timezone.dart' as tz;
+import 'package:tg_app/services/exact_alarm_helper.dart';
 
 class NotiServices {
-  final notificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  bool _isInitialized = false;
 
-  bool _isInstialized = false;
+  bool get isInitialized => _isInitialized;
 
-  bool get isInstialized => _isInstialized;
-
-  //INITIALIZE
-
+  /// Initialisation des notifications + fuseaux horaires
   Future<void> initNotification() async {
-    if (!_isInstialized) return;
+    if (_isInitialized) return;
 
-    const initSettingsAndroid =
-     AndroidInitializationSettings('@mipmap/ic_launcher');
+    // 🕐 Initialiser les fuseaux horaires
+    tzData.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Libreville'));
 
-    const initSettingsIOS = DarwinInitializationSettings(
+    // 📱 Paramètres Android/iOS
+    const androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-
-    const initSettings = InitializationSettings(
-      android: initSettingsAndroid,
-      iOS: initSettingsIOS,
+    const settings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings,
     );
 
-    await notificationsPlugin.initialize(initSettings);
+    await notificationsPlugin.initialize(settings);
+    _isInitialized = true;
   }
 
-
-
+  /// Détails de notification
   NotificationDetails notidicationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        'channelId',
-        'channelName',
-        channelDescription: 'channelDescription',
+        'weekly_channel',
+        'Notifications Hebdomadaires',
+        channelDescription: 'Notification chaque semaine à heure fixe',
         importance: Importance.max,
         priority: Priority.high,
       ),
@@ -44,18 +49,104 @@ class NotiServices {
     );
   }
 
-
-
-  Future<void> showNotification({
-    int id = 0,
-    String? title,
-    String? body,
+  /// Notification hebdomadaire
+  Future<void> scheduleWeeklyNotification({
+    required int id,
+    required String title,
+    required String body,
+    required int weekday,
+    required int hour,
+    required int minute,
   }) async {
-    await notificationsPlugin.show(
-      id,
-      title,
-      body,
-      const NotificationDetails()
+    final hasPermission = await ExactAlarmHelper.hasExactAlarmPermission();
+
+    if (!hasPermission) {
+      print(
+          "❌ Permission 'Exact Alarms' refusée. Notification ID=$id ignorée.");
+      return;
+    }
+
+    final now = tz.TZDateTime.now(tz.local);
+
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    // Avance jusqu’au bon jour de la semaine et une heure future
+    while (scheduledDate.weekday != weekday || scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    print("📆 Notification ID=$id planifiée pour : $scheduledDate");
+
+    try {
+      await notificationsPlugin.zonedSchedule(
+        id,
+        title,
+        body,
+        scheduledDate,
+        notidicationDetails(),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+      );
+    } catch (e) {
+      print("❌ Erreur lors de la planification de la notification ID=$id : $e");
+    }
+  }
+
+  /// Planifier 4 notifications hebdomadaires
+  Future<void> planifier4Notifications() async {
+    await scheduleWeeklyNotification(
+      id: 1,
+      title: 'Lundi - 09h',
+      body: 'Ceci est la notification du lundi à 9h',
+      weekday: DateTime.monday,
+      hour: 9,
+      minute: 0,
+    );
+    print("✅ Notification Lundi 9h planifiée");
+
+    await scheduleWeeklyNotification(
+      id: 2,
+      title: 'Mardi - 12h40',
+      body: 'Ceci est la notification du mardi à 14h30',
+      weekday: DateTime.tuesday,
+      hour: 13,
+      minute: 25,
+    );
+
+    await scheduleWeeklyNotification(
+      id: 3,
+      title: 'Mercredi - 18h45',
+      body: 'Notification du mercredi à 18h45',
+      weekday: DateTime.wednesday,
+      hour: 18,
+      minute: 45,
+    );
+
+    await scheduleWeeklyNotification(
+      id: 4,
+      title: 'Jeudi - 7h15',
+      body: 'Notification du jeudi matin à 7h15',
+      weekday: DateTime.thursday,
+      hour: 13,
+      minute: 10,
+    );
+
+    await scheduleWeeklyNotification(
+      id: 4,
+      title: 'Jeudi - 7h15',
+      body: 'Notification du jeudi matin à 7h15',
+      weekday: DateTime.friday,
+      hour: 13,
+      minute: 10,
     );
   }
 }
